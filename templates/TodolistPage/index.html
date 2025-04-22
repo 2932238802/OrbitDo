@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<!-- 需要加上这个 才能使用static -->
+{% load static %}
+
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的待办事项列表</title>
+    <link rel="stylesheet" href="{% static 'css/todolist.css' %}">
+   
+</head>
+<body>
+
+    <div class="container">
+        <h1>OrbitDo</h1>
+
+        <p id="empty-message" class="empty-message" style="display: none;">当前没有待办事项</p>
+        
+        <!-- 添加任务的表单 -->
+        <div class="add-task-form">
+            <input type="text" id="task-input" placeholder="输入新任务...">
+            <button id="add-task-btn">添加任务</button>
+        </div>
+
+        <ul id="task-list">
+            
+        </ul>
+
+        <button id="clear-task" class="clear-task">清理'已删'任务</button>
+    </div>
+
+
+    <script src="{% static 'js/todolist/todolist.js' %}"></script>
+
+</body>
+</html>

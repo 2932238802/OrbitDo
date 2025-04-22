@@ -1,0 +1,215 @@
+:root {
+    --all-padding-leftandright: 10px;
+
+    --body-margin: 0px;
+    --body-padding: 20px;
+    --background-color: black;
+
+    --h1-title-margin-bottom: 35px;
+
+    --delete-btn-backgroundcolor: #919191;
+    --contain-padding: 30px;
+    --container-margingtop: 10%;
+    --container-margingbottom: 20%;
+
+    --task-list-li-completed-backgroundcolor: #d9edf7;
+}
+
+/* ———————————————————————————————————————————————————————————— */
+/* 全局模块 */
+body {
+    display: flex;
+    justify-content: center;
+
+    margin: var(--body-margin);
+    padding: var(--body-padding);
+
+    background-color: var(--background-color);
+
+    font-family: sans-serif;
+}
+
+/* ———————————————————————————————————————————————————————————— */
+/* 总模块 */
+.container {
+
+    padding: var(--contain-padding);
+    margin-top: var(--container-margingtop);
+    margin-bottom: var(--container-margingbottom);
+    position: relative;
+
+    width: 100%;
+    max-width: 500px;
+
+    height: 100%;
+
+    border-radius: 8px;
+
+    background-color: #fff;
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    /* 限制最大宽度 */
+}
+
+/* ———————————————————————————————————————————————————————————— */
+/* 标题 */
+h1 {
+    margin-bottom: var(--h1-title-margin-bottom);
+
+    color: #333;
+
+    text-align: center;
+}
+
+
+
+/* ———————————————————————————————————————————————————————————— */
+/* 增任务的按钮区域 */
+.add-task-form {
+    display: flex;
+    gap: 10px;
+    /* 输入框和按钮间距 */
+    margin-bottom: 20px;
+}
+
+
+/* ———————————————————————————————————————————————————————————— */
+/* 增加的输入框 */
+/* 0：默认值。若 flex-grow 设为 0，该 flex 项目不会去扩展以填充剩余空间。
+正数：若 flex-grow 为正数（如 1、2 等），表示该 flex 项目会依据这个数值按比例分配剩余空间。
+例如，一个 flex 容器中有两个项目，项目 A 的 flex-grow 为 1，
+项目 B 的 flex-grow 为 2，那么项目 B 分配到的剩余空间是项目 A 的两倍。*/
+#task-input {
+    flex-grow: 1;
+    padding: 10px;
+
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    font-size: 16px;
+}
+
+/* 增加的按钮 */
+#add-task-btn {
+    padding: var(--all-padding-leftandright) 15px;
+
+    background-color: #5cb85c;
+    color: white;
+
+    border: none;
+    border-radius: 4px;
+
+    font-size: 16px;
+
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+#add-task-btn:hover {
+    background-color: #68E500;
+}
+
+/* ———————————————————————————————————————————————————————————— */
+/* 任务列表 */
+#task-list {
+    list-style: none;
+
+    padding: 0;
+    margin: 0 0 20px 0;
+
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* 没完成的任务 */
+#task-list li {
+    display: flex;
+    margin-bottom: 10px;
+    padding: var(--all-padding-leftandright) 15px;
+
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: #eee;
+
+    border-radius: 4px;
+
+    transition: background-color 0.2s;
+}
+
+/* 完成的任务 */
+#task-list li.completed {
+    background-color: var(--task-list-li-completed-backgroundcolor);
+    color: #777;
+
+    /* 任务完成得线 */
+    text-decoration: line-through;
+}
+
+/* 显示任务的文字区域 */
+#task-list li span {
+    flex-grow: 1;
+    margin-right: 10px;
+
+    cursor: pointer;
+}
+
+/* 显示任务的删除按钮区域 */
+.delete-btn {
+    padding: 5px 10px;
+
+    background-color: var(--delete-btn-backgroundcolor);
+
+    border: none;
+    border-radius: 4px;
+
+    font-size: 12px;
+    color: white;
+
+    transition: background-color 0.2s;
+
+    cursor: pointer;
+}
+
+/* 悬停效果区域 */
+.delete-btn:hover {
+    background-color: #c9302c;
+}
+
+
+/* ———————————————————————————————————————————————————————————— */
+/* 用于空消息的提示框 */
+.empty-message {
+    position: 'absolute';
+    bottom: 100%;
+
+    margin-bottom: 20px;
+
+    color: #888;
+    text-align: center;
+}
+
+/* ———————————————————————————————————————————————————————————— */
+/* 删除已经在按钮 */
+.clear-task {
+    padding: var(--all-padding-leftandright) 15px;
+    margin: 20px 180px;
+
+    background-color: #5cb85c;
+    color: white;
+
+    border: none;
+    border-radius: 4px;
+
+    font-size: 16px;
+
+    transition: background-color 0.2s;
+    cursor: pointer;
+
+}
+
+.clear-task:hover {
+    background-color: #68E500;
+
+}

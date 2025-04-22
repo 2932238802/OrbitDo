@@ -1,0 +1,167 @@
+:root {
+    --body-backfround-color: #1a1a1a;
+
+    --button-color: black;
+    --button-border-color: white;
+    --button-background-color: rgb(139, 139, 139);
+
+    --login-container-color: #333;
+    --login-cotainer-boxshadow-color: rgba(0, 0, 0, 0.5);
+    --login-container-border-color: #555;
+
+    --title-color: #f0f0f0;
+}
+
+/*————————————————————————————————————————————————————————————————*/
+/* 总体样式 */
+body {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+
+    background-color: var(--body-backfround-color);
+    font-family: sans-serif;
+    align-items: center;
+}
+
+/*————————————————————————————————————————————————————————————————*/
+/* 全局button */
+.global-btn {
+    padding: 10px 35px;
+    margin-top: 10px;
+    margin-left: 4.5px;
+    margin-right: 4.5px;
+
+    color: var(--button-color);
+    background-color: var(--button-background-color);
+
+    border: 1px solid var(--button-border-color);
+    border-radius: 5px;
+    box-shadow: 0 4px 15px var(--login-cotainer-boxshadow-color);
+}
+
+.global-btn:hover {
+    background-color: black;
+    color: rgb(139, 139, 139);
+}
+
+/*————————————————————————————————————————————————————————————————*/
+/* 注册登录切换 */
+.hidden {
+    display: none;
+}
+
+/*————————————————————————————————————————————————————————————————*/
+/* 登录表 */
+.login-container {
+    padding: 30px;
+    width: 300px;
+
+    background-color: var(--login-container-color);
+
+    border-radius: 8px;
+    box-shadow: 0 4px 15px var(--login-cotainer-boxshadow-color);
+    border: 1px solid var(--login-container-border-color);
+}
+
+.register-container {
+    padding: 30px;
+    width: 300px;
+
+    background-color: var(--login-container-color);
+
+    border-radius: 8px;
+    box-shadow: 0 4px 15px var(--login-cotainer-boxshadow-color);
+    border: 1px solid var(--login-container-border-color);
+
+}
+
+/*————————————————————————————————————————————————————————————————*/
+/* 用户登录&用户注册的标题 */
+.login-container h2 {
+    text-align: center;
+
+    color: var(--title-color);
+
+    margin-bottom: 20px;
+}
+
+/*————————————————————————————————————————————————————————————————*/
+.form-group {
+    margin-bottom: 15px;
+}
+
+
+/*————————————————————————————————————————————————————————————————*/
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+
+    color: #ccc;
+}
+
+/*————————————————————————————————————————————————————————————————*/
+.form-group input {
+    width: 100%;
+    padding: 10px;
+
+    background-color: #282828;
+    /* 添加: 输入框深色背景 */
+    color: #f0f0f0;
+
+    box-sizing: border-box;
+    border: 1px solid #555;
+    /* 改为: 中灰色边框 */
+    border-radius: 4px;
+}
+
+/*————————————————————————————————————————————————————————————————*/
+.form-group input:focus {
+    outline: none;
+    /* 移除默认的外发光 */
+    border-color: #aaa;
+    /* 边框变亮 */
+    box-shadow: 0 0 5px rgba(170, 170, 170, 0.3);
+    /* 轻微外发光 (可选) */
+}
+
+/*————————————————————————————————————————————————————————————————*/
+.login-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+
+    background-color: #757575;
+
+    color: #1a1a1a;
+    font-weight: bold;
+    font-size: 16px;
+
+    border-radius: 4px;
+    border: none;
+
+    cursor: pointer;
+}
+
+/*————————————————————————————————————————————————————————————————*/
+.login-button:hover {
+    background-color: #ccc;
+    color: #000;
+}
+
+/*————————————————————————————————————————————————————————————————*/
+.login-container div a {
+    color: #aaa;
+    text-decoration: none;
+}
+
+/*————————————————————————————————————————————————————————————————*/
+.login-container div a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/*————————————————————————————————————————————————————————————————*/
+input[name="csrfmiddlewaretoken"] {
+    display: none;
+}
