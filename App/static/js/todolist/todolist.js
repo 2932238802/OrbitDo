@@ -47,13 +47,16 @@ const showTemporaryMessage = () => {
     }
 };
 
+/**
+ * 无内容 -> 显示
+ * @returns
+ */
 const UpdateEmptyMessageVisibility = () => {
     if (!task_list || !empty_message) return; // 确保元素存在
 
     const all_tasks = task_list.querySelectorAll('li');
     const completed_tasks = task_list.querySelectorAll('li.completed');
 
-    // 如果没有任务，或者有任务但所有任务都已完成
     if (
         all_tasks.length === 0 ||
         (all_tasks.length > 0 && all_tasks.length === completed_tasks.length)
@@ -66,7 +69,6 @@ const UpdateEmptyMessageVisibility = () => {
 
 // ————————————————————————————————————————————————————————————
 // 业务函数
-
 /**
  * 增加任务
  * @param {Event} event - 触发展示的事件对象 (用于 preventDefault)
@@ -134,9 +136,30 @@ const DeleteTask = (event) => {
 };
 
 /**
- *
+ * 删除有 completed 样式
  */
-const ClearTask = () => {};
+const ClearTask = () => {
+    // <<< 函数名修改，更清晰
+    if (!task_list) {
+        console.error('错误：无法清理任务，task_list 不存在。');
+        return;
+    }
+
+    const completed_tasks = task_list.querySelectorAll('li.completed');
+
+    completed_tasks.forEach((taskElement) => {
+        taskElement.remove(); // 直接移除元素本身
+        // 或者 task_list.removeChild(taskElement); 效果相同
+    });
+
+    console.log(`清除了 ${completed_tasks.length} 个已完成的任务。`);
+
+    UpdateEmptyMessageVisibility();
+
+    if (task_input) {
+        task_input.focus();
+    }
+};
 
 // ————————————————————————————————————————————————————————————
 // 主要倾听业务代码
@@ -166,5 +189,15 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error("错误：未找到 ID 为 'task-list' 的元素。");
     }
+
+    if (clear_task) {
+        // 使用正确的按钮变量名
+        clear_task.addEventListener('click', ClearTask); // 调用清理函数
+    } else {
+        console.warn(
+            "提示：未找到 ID 为 'clear-task' 的元素，清理已完成任务功能不可用。"
+        ); // 改为警告，可能不需要此按钮
+    }
+
     UpdateEmptyMessageVisibility();
 });
