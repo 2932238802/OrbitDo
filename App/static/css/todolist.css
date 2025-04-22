@@ -5,6 +5,8 @@
     --body-padding: 20px;
     --background-color: black;
 
+    --contain-backgroundcolor: #fff;
+
     --h1-title-margin-bottom: 35px;
 
     --delete-btn-backgroundcolor: #919191;
@@ -41,11 +43,9 @@ body {
     width: 100%;
     max-width: 500px;
 
-    height: 100%;
-
     border-radius: 8px;
 
-    background-color: #fff;
+    background-color: var(--contain-backgroundcolor);
 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 

@@ -158,3 +158,22 @@ origin  git@github.com:2932238802/OrbitDo.git (push)
 
 # (假设你已经 add 和 commit 了修改)
 git push
+
+
+
+
+
+#### docker 语法
+FROM	必须是第一条指令 (除 ARG)。指定基础镜像，后续指令在此基础上构建。	FROM python:3.9-slim
+WORKDIR	设置工作目录，后续的 RUN, CMD, ENTRYPOINT, COPY, ADD 指令都在此目录下执行。	WORKDIR /app
+COPY	将本地文件或目录复制到镜像文件系统中。通常用于复制项目代码、配置文件等。	COPY . /app 或 COPY requirements.txt .
+ADD	功能类似 COPY，但更强大，可以自动解压压缩包（如 tar, gzip）或从 URL 下载文件。但一般推荐优先使用 COPY，除非需要 ADD 的特殊功能。	ADD https://example.com/file.tar.gz /tmp/
+RUN	在镜像构建过程中执行命令。通常用于安装软件包、库、创建目录等。每条 RUN 指令会创建一个新的镜像层。	RUN pip install -r requirements.txt
+EXPOSE	声明镜像运行时容器打算监听的网络端口。这只是一个声明，并不实际发布端口，发布端口需要在 docker run 时使用 -p 或 -P 参数。	EXPOSE 8000
+CMD	容器启动时默认执行的命令。 Dockerfile 中可以有多条 CMD，但只有最后一条生效。如果 docker run 时指定了命令，则会覆盖 CMD。	CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT	容器启动时执行的命令，类似 CMD。 但它不会被 docker run 时提供的参数轻易覆盖，而是将参数作为 ENTRYPOINT 命令的参数。常用于制作可执行的容器。	ENTRYPOINT ["python", "app.py"]
+ENV	设置环境变量。这些变量在镜像构建过程和容器运行时都可用。	ENV MY_VAR=my_value
+ARG	定义构建时变量。可以在 docker build --build-arg <varname>=<value> 时传递。注意： ARG 定义的变量在镜像构建完成后通常不可用，除非用 ENV 再设置一次。	ARG USER=guest
+VOLUME	创建一个挂载点，用于持久化数据或共享数据。通常用于数据库数据、日志文件等。	VOLUME /var/lib/mysql
+USER	指定运行后续 RUN, CMD, ENTRYPOINT 指令时使用的用户名或 UID。	USER nobody
+LABEL	为镜像添加元数据，如维护者信息、版本号等。	LABEL maintainer="Your Name <you@example.com>"
