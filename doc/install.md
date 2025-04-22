@@ -120,3 +120,41 @@ dict.get(key, default=None)
 key：这是必须要提供的参数，代表你要在字典里查找的键。
 default：属于可选参数，当字典中不存在指定的键时，就会返回这个默认值。如果不提供这个参数，默认值为 None。
    
+
+
+#### 即使你的电脑上存在有效的 SSH 密钥，并且该密钥已经添加到了你的 GitHub 账户，如果你的 特定项目 的远程 URL 设置的是 HTTPS，Git 还是会优先尝试 HTTPS 认证。
+
+你需要将你本地 OrbitDo 项目的远程仓库 URL 从 HTTPS 更改为 SSH。
+
+步骤 1: 确认当前的远程 URL
+
+进入你的项目目录，然后运行以下命令：
+
+cd ~/Project/OrbitDo  # 确保在正确的项目目录下
+git remote -v
+仔细查看输出。如果 origin 对应的 URL 是以 https:// 开头的，那么这就是问题所在。例如：
+
+origin  https://github.com/2932238802/OrbitDo.git (fetch)
+origin  https://github.com/2932238802/OrbitDo.git (push)
+步骤 2: 更改远程 URL 为 SSH 格式
+
+使用 git remote set-url 命令来修改 origin 的 URL。SSH URL 的格式是 git@github.com:你的GitHub用户名/你的仓库名.git。
+
+git remote set-url origin git@github.com:2932238802/OrbitDo.git
+请确保将 2932238802 替换为你的实际 GitHub 用户名，并将 OrbitDo 替换为你的实际仓库名称。
+
+步骤 3: 再次确认远程 URL
+
+再次运行 git remote -v 确认 URL 是否已成功修改：
+
+git remote -v
+现在的输出应该显示 SSH 格式的 URL：
+
+origin  git@github.com:2932238802/OrbitDo.git (fetch)
+origin  git@github.com:2932238802/OrbitDo.git (push)
+步骤 4: 再次尝试 git push
+
+现在，当你执行 git push 时，Git 应该会使用 SSH 协议和你的 SSH 密钥进行认证，不再提示输入用户名和密码。
+
+# (假设你已经 add 和 commit 了修改)
+git push
