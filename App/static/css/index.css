@@ -1,167 +1,298 @@
 :root {
-    --body-backfround-color: #1a1a1a;
-
-    --button-color: black;
-    --button-border-color: white;
-    --button-background-color: rgb(139, 139, 139);
-
-    --login-container-color: #333;
-    --login-cotainer-boxshadow-color: rgba(0, 0, 0, 0.5);
-    --login-container-border-color: #555;
+    --body-background-color: #1a1a1a;
+    --container-background-color: #333;
+    --container-border-color: #555;
+    --container-boxshadow-color: rgba(0, 0, 0, 0.5);
 
     --title-color: #f0f0f0;
+    --text-color-primary: #ccc;
+    --text-color-secondary: #aaa;
+    --text-color-input: #f0f0f0;
+    --text-color-button: #1a1a1a;
+    --text-color-button-hover: #000;
+    --text-color-global-btn: black;
+    --text-color-global-btn-hover: rgb(139, 139, 139);
+
+    --input-background-color: #282828;
+    --input-border-color: #555;
+    --input-focus-border-color: #aaa;
+    --input-focus-shadow-color: rgba(170, 170, 170, 0.3);
+    --input-invalid-border-color: #a05050;
+
+    --button-background-color: #757575;
+    --button-hover-background-color: #ccc;
+    --global-btn-background-color: rgb(139, 139, 139);
+    --global-btn-hover-background-color: black;
+    --global-btn-border-color: white;
+
+    --message-error-background: #5c2a2a;
+    --message-error-text: #ffdddd;
+    --message-error-border: #a05050;
+    --message-success-background: #2a5c2a;
+    --message-success-text: #ddffdd;
+    --message-success-border: #50a050;
+
+    --spinner-track-color: rgba(255, 255, 255, 0.3);
+    --spinner-color: #fff;
 }
 
 /*————————————————————————————————————————————————————————————————*/
-/* 总体样式 */
+/* 1. 总体样式 & 布局 */
 body {
     display: flex;
     justify-content: center;
-    min-height: 100vh;
-
-    background-color: var(--body-backfround-color);
-    font-family: sans-serif;
     align-items: center;
+    /* 垂直居中 */
+    min-height: 100vh;
+    background-color: var(--body-background-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /* 更现代的字体栈 */
+    line-height: 1.5;
+    /* 增加行高 */
+}
+
+/* 隐藏辅助类 */
+.hidden {
+    display: none !important;
+    /* 使用 !important 确保覆盖其他 display 规则 */
 }
 
 /*————————————————————————————————————————————————————————————————*/
-/* 全局button */
-.global-btn {
-    padding: 10px 35px;
-    margin-top: 10px;
-    margin-left: 4.5px;
-    margin-right: 4.5px;
+/* 2. 登录/注册容器 */
+/* 统一容器样式，HTML 中两个 div 都用了 login-container class */
+.login-container {
+    width: 320px;
+    /* 可以稍微加宽一点 */
+    padding: 30px;
+    background-color: var(--container-background-color);
+    border: 1px solid var(--container-border-color);
+    border-radius: 8px;
+    box-shadow: 0 6px 20px var(--container-boxshadow-color);
+    /* 阴影可以更明显一点 */
+    box-sizing: border-box;
+    /* 包含 padding 和 border */
+    transition: all 0.3s ease-out;
+    /* 添加切换时的过渡效果 (如果JS控制显隐) */
+}
 
-    color: var(--button-color);
+/* 容器标题 (h2) */
+.login-container h2 {
+    margin-top: 0;
+    /* 移除顶部默认 margin */
+    margin-bottom: 25px;
+    /* 增加与表单的间距 */
+    color: var(--title-color);
+    text-align: center;
+    font-weight: 600;
+    /* 稍加粗 */
+    font-size: 1.5em;
+    /* 稍大一点 */
+}
+
+/*————————————————————————————————————————————————————————————————*/
+/* 3. 表单元素 (Form Groups, Labels, Inputs) */
+.form-group {
+    margin-bottom: 18px;
+    /* 统一组间距 */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    /* 标签与输入框间距 */
+    color: var(--text-color-primary);
+    font-size: 0.9em;
+    /* 标签字号稍小 */
+    font-weight: 500;
+    /* 标签稍加粗 */
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    /* 增加内边距 */
+    background-color: var(--input-background-color);
+    color: var(--text-color-input);
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    /* 确保 padding 不影响宽度 */
+    font-size: 1em;
+    /* 标准输入字号 */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    /* 平滑过渡 */
+}
+
+/* 输入框聚焦状态 */
+.form-group input:focus {
+    outline: none;
+    /* 移除默认轮廓 */
+    border-color: var(--input-focus-border-color);
+    box-shadow: 0 0 0 3px var(--input-focus-shadow-color);
+    /* 使用阴影代替 box-shadow */
+}
+
+/* 基本的 CSS 验证提示 (可选，更复杂的需要 JS) */
+/* 当字段无效、非空且未聚焦时显示红色边框 */
+.form-group input:invalid:not(:placeholder-shown):not(:focus) {
+    border-color: var(--input-invalid-border-color);
+}
+
+/* 隐藏 Django CSRF Token 输入框 */
+input[name="csrfmiddlewaretoken"] {
+    display: none;
+}
+
+/*————————————————————————————————————————————————————————————————*/
+/* 4. 按钮样式 (主提交按钮, 全局小按钮, 文本链接按钮) */
+/* 主要提交按钮 (登录/注册) */
+.login-button {
+    display: flex;
+    /* 使用 Flexbox 居中文本和加载图标 */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 12px;
+    /* 增加按钮高度 */
+    margin-top: 15px;
+    /* 与上方元素间距 */
     background-color: var(--button-background-color);
+    color: var(--text-color-button);
+    font-weight: bold;
+    font-size: 1em;
+    /* 标准按钮字号 */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
 
-    border: 1px solid var(--button-border-color);
+.login-button:hover {
+    background-color: var(--button-hover-background-color);
+    color: var(--text-color-button-hover);
+}
+
+/* 按钮内的文本 (用于配合加载图标) */
+.button-text {
+    transition: opacity 0.2s ease;
+}
+
+/* 加载状态下的按钮 */
+.login-button.loading .button-text {
+    opacity: 0;
+    /* 隐藏文本 */
+}
+
+/* 加载动画图标 */
+.loading-spinner {
+    position: absolute;
+    /* 绝对定位在按钮中间 */
+    width: 18px;
+    /* 图标大小 */
+    height: 18px;
+    border: 3px solid var(--spinner-track-color);
+    border-radius: 50%;
+    border-top-color: var(--spinner-color);
+    animation: spin 1s linear infinite;
+    /* 使用 linear 动画 */
+    /* 默认隐藏，由 JS 控制添加 loading 类时显示 */
+    /* .hidden 类会处理 display: none */
+}
+
+/* 加载动画 */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 全局小按钮 (忘记密码/注册新账号) */
+.global-btn {
+    padding: 8px 15px;
+    /* 调整 padding */
+    margin: 0 5px;
+    /* 左右间距 */
+    color: var(--text-color-global-btn);
+    background-color: var(--global-btn-background-color);
+    border: 1px solid var(--global-btn-border-color);
     border-radius: 5px;
-    box-shadow: 0 4px 15px var(--login-cotainer-boxshadow-color);
+    font-size: 0.9em;
+    /* 字号稍小 */
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .global-btn:hover {
-    background-color: black;
-    color: rgb(139, 139, 139);
+    background-color: var(--global-btn-hover-background-color);
+    color: var(--text-color-global-btn-hover);
 }
 
-/*————————————————————————————————————————————————————————————————*/
-/* 注册登录切换 */
-.hidden {
-    display: none;
-}
-
-/*————————————————————————————————————————————————————————————————*/
-/* 登录表 */
-.login-container {
-    padding: 30px;
-    width: 300px;
-
-    background-color: var(--login-container-color);
-
-    border-radius: 8px;
-    box-shadow: 0 4px 15px var(--login-cotainer-boxshadow-color);
-    border: 1px solid var(--login-container-border-color);
-}
-
-.register-container {
-    padding: 30px;
-    width: 300px;
-
-    background-color: var(--login-container-color);
-
-    border-radius: 8px;
-    box-shadow: 0 4px 15px var(--login-cotainer-boxshadow-color);
-    border: 1px solid var(--login-container-border-color);
-
-}
-
-/*————————————————————————————————————————————————————————————————*/
-/* 用户登录&用户注册的标题 */
-.login-container h2 {
-    text-align: center;
-
-    color: var(--title-color);
-
-    margin-bottom: 20px;
-}
-
-/*————————————————————————————————————————————————————————————————*/
-.form-group {
-    margin-bottom: 15px;
-}
-
-
-/*————————————————————————————————————————————————————————————————*/
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-
-    color: #ccc;
-}
-
-/*————————————————————————————————————————————————————————————————*/
-.form-group input {
-    width: 100%;
-    padding: 10px;
-
-    background-color: #282828;
-    /* 添加: 输入框深色背景 */
-    color: #f0f0f0;
-
-    box-sizing: border-box;
-    border: 1px solid #555;
-    /* 改为: 中灰色边框 */
-    border-radius: 4px;
-}
-
-/*————————————————————————————————————————————————————————————————*/
-.form-group input:focus {
-    outline: none;
-    /* 移除默认的外发光 */
-    border-color: #aaa;
-    /* 边框变亮 */
-    box-shadow: 0 0 5px rgba(170, 170, 170, 0.3);
-    /* 轻微外发光 (可选) */
-}
-
-/*————————————————————————————————————————————————————————————————*/
-.login-button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-
-    background-color: #757575;
-
-    color: #1a1a1a;
-    font-weight: bold;
-    font-size: 16px;
-
-    border-radius: 4px;
+/* 文本链接按钮 (已有账号？立即登录) */
+.text-link {
+    background: none;
     border: none;
-
-    cursor: pointer;
-}
-
-/*————————————————————————————————————————————————————————————————*/
-.login-button:hover {
-    background-color: #ccc;
-    color: #000;
-}
-
-/*————————————————————————————————————————————————————————————————*/
-.login-container div a {
-    color: #aaa;
+    padding: 0;
+    margin: 0;
+    /* 移除默认 margin */
+    color: var(--text-color-secondary);
     text-decoration: none;
+    /* 无下划线 */
+    cursor: pointer;
+    font-size: 0.9em;
+    font-family: inherit;
+    /* 继承父元素字体 */
+    transition: color 0.2s ease, text-decoration 0.2s ease;
 }
 
-/*————————————————————————————————————————————————————————————————*/
-.login-container div a:hover {
-    color: #fff;
+.text-link:hover {
+    color: var(--title-color);
+    /* 悬浮时颜色变亮 */
     text-decoration: underline;
+    /* 添加下划线 */
 }
 
 /*————————————————————————————————————————————————————————————————*/
-input[name="csrfmiddlewaretoken"] {
+/* 5. 特定区域样式 (表单底部, 消息框) */
+/* 登录表单底部链接容器 */
+#login-form>div:last-of-type {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 注册表单底部容器 */
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 消息提示框 (#register-message) */
+.message-box {
+    padding: 10px 15px;
+    margin-bottom: 18px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    border: 1px solid transparent;
+    /* 默认透明边框占位 */
     display: none;
+    /* 默认隐藏 */
+}
+
+/* 错误消息样式 */
+.message-box.error {
+    background-color: var(--message-error-background);
+    color: var(--message-error-text);
+    border-color: var(--message-error-border);
+    display: block;
+    /* 显示 */
+}
+
+/* 成功消息样式 (如果需要) */
+.message-box.success {
+    background-color: var(--message-success-background);
+    color: var(--message-success-text);
+    border-color: var(--message-success-border);
+    display: block;
+    /* 显示 */
 }

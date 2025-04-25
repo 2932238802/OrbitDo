@@ -59,12 +59,12 @@ const Summit = (event_) => {
 
     // 清理信息
     // ClearMessages();
-
     // 获取注册和登录信息
     const user_name = login_user_name.value;
     const password = login_password.value;
 
     // 发送信息
+    // 编辑信息的账密
     const message_ = {
         user_name: user_name,
         password: password,
@@ -77,7 +77,8 @@ const Summit = (event_) => {
             if (data.success) {
                 localStorage.setItem('AuthToken', data.token);
                 console.log('登录成功!');
-                window.location.href = 'Todolist/';
+                // window.location.href = 'Todolist/';
+                window.location.href = 'guess/';
             } else {
                 console.log('登录失败!');
             }

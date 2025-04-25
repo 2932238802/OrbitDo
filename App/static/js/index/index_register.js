@@ -9,7 +9,7 @@ const loading_spinner = submit_btn.querySelector('.loading-spinner');
 // 组件函数
 /**
  *
- * @param {*} is_loading
+ * @param {boolean} is_loading
  */
 const set_loading = (is_loading) => {
     submit_btn.disabled = is_loading;
@@ -21,8 +21,8 @@ const set_loading = (is_loading) => {
 
 /**
  *
- * @param {} text
- * @param {*} is_error
+ * @param {string} text
+ * @param {boolean} is_error
  */
 const show_message = (text, is_error = true) => {
     message_el.textContent = text;
@@ -49,7 +49,7 @@ const validate_password = (password) => {
  *  ["用户名已存在", "邮箱已被注册"]
  *
  *
- * @param {提交的参数} e
+ * @param {Event} e
  * @returns
  */
 const Submit = async (e) => {

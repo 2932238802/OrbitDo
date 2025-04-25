@@ -15,7 +15,6 @@
         <form action="" method="post" id="login-form">
             <!-- 这就是 CSRF：攻击者在你不知情的情况下，利用你的身份在另一个网站上执行了恶意操作。-->
             {% csrf_token %}
-
             <!-- 账号 -->
             <div class="form-group">
                 <input type="text" id="username" name="username" required>

@@ -18,22 +18,18 @@ from django.contrib import admin
 from django.urls import path
 
 # 首页
-from App.views import HomePage
-from App.views import LoginPost
-from App.views import RegisterPost
-from App.views import Todolist
-
 from django.urls import path  
 
+# 导入视图
+from App.views import HomePage, LoginPost, RegisterPost, Todolist, Guess,ReturnAnswer
+
 urlpatterns = [
-    
-    path('admin/', admin.site.urls),  
-    
-    path('login/', LoginPost, name='login'),  
-    
-    path('register/', RegisterPost, name='register'),
-    
-    path('', HomePage, name='home'),
-    
-    path('Todolist/',Todolist,name="Todolist")
+    # path('', HomePage, name='home'),
+    # path('admin/', admin.site.urls),  
+    # path('login/', LoginPost, name='login'),  
+    # path('register/', RegisterPost, name='register'),
+    # path('todolist/', Todolist, name='todolist'),
+    # path('guess/', Guess, name='guess'),
+    path('', Guess, name='guess'),
+    path('returnanswer/',ReturnAnswer,name='returnanswer')
 ]
