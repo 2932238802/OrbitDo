@@ -1,15 +1,29 @@
+
 .git
 .gitignore
+Dockerfile  # 通常也建议加上 Dockerfile 本身
+.dockerignore # 和 .dockerignore 本身
+
 venv/
 .venv/
 env/
 *.pyc
 __pycache__/
+
 .idea/
 .vscode/
 *.swp
 *~
 .DS_Store
+
 .env
+
 node_modules/
 npm-debug.log
+
+App/data/idiom-database/data/idiom.csv
+App/data/idiom-database/data/idiom.sql
+
+doc/
+
+*.log
