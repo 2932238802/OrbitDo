@@ -12,19 +12,24 @@ WORKDIR /app
 # RUN apt-get update && apt-get install -y --no-install-recommends some-package \
 #  && rm -rf /var/lib/apt/lists/*
 
-# 4. 安装 Python 依赖
+# 安装 Python 依赖
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# 6. 暴露端口
+# 暴露端口
 # 暴露 Gunicorn 将要监听的端口
 EXPOSE 8080
+
+RUN python manage.py collectstatic --noinput
+
+# 调试一下
+RUN echo "--- Contents of STATIC_ROOT ---" && ls -lR /app/staticfiles
 
 # 7. 运行命令 (使用 Gunicorn)
 # 假设你的 Django 项目(包含 wsgi.py 的目录)名为 'App'
 # 如果你的项目主应用名不同，请修改 'App.wsgi:application'
 # --workers 3: 指定 3 个工作进程处理请求 (可以根据需要调整)
 # --bind 0.0.0.0:8080: 监听所有网络接口的 8080 端口
-CMD ["gunicorn", "App.wsgi:application", "--bind", "0.0.0.0:8080", "--workers", "3"]
+CMD ["gunicorn", "OrbitDo.wsgi:application", "--bind", "0.0.0.0:8080", "--workers", "3"]
