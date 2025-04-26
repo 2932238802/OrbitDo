@@ -1,10 +1,15 @@
 # OrbitDo
 
 #### 运行方式
-- 本地  >> python manage.py runserver 即可运行啦
-- 恢复登录注册功能：
-修改 OrbitDo/urls.py 去掉注释
 
+- 确保本地安装了 docker && docker desktop
+- 运行 : cd 到 Orbitto 目录 然后运行 
+>> docker build -t orbitdo-app . 
+>> docker run -d -p 8080:8080 --name my-orbitdo-container orbitdo-app
+>> 打开本地 127.0.0.1:8080 端口即可访问了
+
+
+#### 登录和注册界面
 ```python
 urlpatterns = [
     # path('', HomePage, name='home'),
