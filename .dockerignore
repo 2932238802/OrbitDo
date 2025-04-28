@@ -21,9 +21,6 @@ __pycache__/
 node_modules/
 npm-debug.log
 
-App/data/idiom-database/data/idiom.csv
-App/data/idiom-database/data/idiom.sql
-
 doc/
 
 *.log
